@@ -2,6 +2,7 @@
 #include <sys/socket.h>
 #include <errno.h>
 #include <libgen.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -15,7 +16,7 @@ const char MODE_LOCK = 'l';
 const char LOCK_LOCKED = 0;
 const char LOCK_UNLOCKED = 1;
 
-void sendpkt(const char *pkt) {
+void sendpkt(const uint8_t *pkt) {
 	int sfd = -1;
 	if((sfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0)
 		bail("socket()");
