@@ -25,6 +25,7 @@ int main() {
 
 	wiringPiSetup();
 	softPwmCreate(GPIO_SERVO, SERVO_LOCKED, SERVO_RANGE);
+	sleep(1);
 
 	uint8_t buf[PCKT_LEN];
 	while(true) {
