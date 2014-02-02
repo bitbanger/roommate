@@ -11,7 +11,6 @@
 #include "daemon.h"
 #include "roommate.h"
 
-void bail(const char *);
 
 int main() {
 	int sock;
@@ -49,9 +48,4 @@ int main() {
 			sleep(1); // TODO: don't block here
 		}
 	}
-}
-
-void bail(const char *problem) {
-	fprintf(stderr, "%s: %s\n", problem, strerror(errno));
-	exit(1);
 }
