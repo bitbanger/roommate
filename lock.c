@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
+#include <unistd.h>
 
 #include "roommate.h"
 
@@ -25,7 +27,13 @@ int main(int argc, char **argv) {
 	}	
 	
 	sendpkt(msg);
+
+	time_t rightnow = time(NULL);
+	struct tm *stamp = localtime(&rightnow);
+
+	char timestamp[100]; // probably big enough...
+	strftime(timestamp, sizeof timestamp, "%a %F %T", stamp);
+	logline("%s := Door %s by %s\n", timestamp, msg[1] == LOCK_LOCKED ? "locked" : "unlocked", cuserid(NULL));
 	
 	return 0;
 }
-

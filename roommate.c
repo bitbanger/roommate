@@ -2,6 +2,7 @@
 #include <sys/socket.h>
 #include <errno.h>
 #include <libgen.h>
+#include <stdarg.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -15,6 +16,8 @@ const int PCKT_LEN = 4; // B
 const char MODE_LOCK = 'l';
 const char LOCK_LOCKED = 0;
 const char LOCK_UNLOCKED = 1;
+
+const char *LOGFILE_PATH = "/var/log/roommate";
 
 void sendpkt(const uint8_t *pkt) {
 	int sfd = -1;
@@ -31,6 +34,16 @@ void sendpkt(const uint8_t *pkt) {
 		bail("sendto()");
 
 	close(sfd);
+}
+
+void logline(const char *msg, ...) {
+	va_list args;
+	FILE *file = fopen(LOGFILE_PATH, "a");
+
+	va_start(args, msg);
+	vfprintf(file, msg, args);
+	va_end(args);
+	close(file);
 }
 
 void bail(const char *problem) {
