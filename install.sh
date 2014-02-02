@@ -13,9 +13,9 @@ if ! make
 
 [ -e /usr/local/bin/lock -o -e /usr/local/bin/unlock ] && rm /usr/local/bin/lock /usr/local/bin/unlock
 
-cp lock unlock /usr/local/bin/
-chgrp staff /usr/local/bin/lock /usr/local/bin/unlock
-chmod g+x,o= /usr/local/bin/lock /usr/local/bin/unlock
+cp lock unlock doorlog /usr/local/bin/
+chgrp staff /usr/local/bin/lock /usr/local/bin/unlock /usr/local/bin/doorlog
+chmod g+x,o= /usr/local/bin/lock /usr/local/bin/unlock /usr/local/bin/doorlog
 
 if [ ! -e /var/log/roommate ]
 	then
