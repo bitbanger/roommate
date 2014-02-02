@@ -1,11 +1,15 @@
 #ifndef ROOMMATE_H
 #define ROOMMATE_H
 
-const int PORT = 1030;
-const int PCKT_LEN = 4; // B
+const int PORT;
+const int PCKT_LEN;
 
-const char MODE_LOCK = 'l';
-const char LOCK_LOCKED = 0;
-const char LOCK_UNLOCKED = 1;
+const char MODE_LOCK;
+const char LOCK_LOCKED;
+const char LOCK_UNLOCKED;
+
+void sendpkt(const char *);
+
+void bail(const char *);
 
 #endif
