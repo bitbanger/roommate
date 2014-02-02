@@ -11,7 +11,7 @@ if ! make
 		exit 1
 	fi
 
-[ -e /usr/local/bin/lock -o -e /usr/local/bin/unlock ] && rm /usr/local/bin/lock /usr/local/bin/unlock
+[ -e /usr/local/bin/lock -o -e /usr/local/bin/unlock -o -e /usr/local/bin/doorlog ] && rm -f /usr/local/bin/lock /usr/local/bin/unlock /usr/local/bin/doorlog
 
 cp lock unlock doorlog /usr/local/bin/
 chgrp staff /usr/local/bin/lock /usr/local/bin/unlock /usr/local/bin/doorlog
