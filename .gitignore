@@ -1,4 +1,5 @@
 /daemon
+/light
 /lock
 /unlock
 *.o

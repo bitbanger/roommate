@@ -1,4 +1,4 @@
-BINARIES := daemon lock unlock
+BINARIES := daemon lock unlock light
 
 all: ${BINARIES}
 roommate.o: roommate.h
@@ -9,6 +9,8 @@ daemon: CFLAGS += -lwiringPi
 lock: roommate.o
 unlock: lock
 	cp lock unlock
+
+light: roommate.o
 
 clean:
 	- rm *.o
