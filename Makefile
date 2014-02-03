@@ -1,4 +1,4 @@
-BINARIES := daemon lock unlock light
+BINARIES := daemon lock unlock light lightc
 CFLAGS += -std=c99 -Wall
 
 all: ${BINARIES}
@@ -12,6 +12,8 @@ unlock: lock
 	cp lock unlock
 
 light: roommate.o
+lightc:	light
+	cp light lightc
 
 clean:
 	- rm *.o
