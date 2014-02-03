@@ -12,7 +12,6 @@ int main(int argc, char **argv) {
 	char *ename = basename(argv[0]);
 
 	uint8_t msg[PCKT_LEN];
-	int i;
 	memset(msg, 0, sizeof msg);
 
 	msg[0] = MODE_LOCK; // cock blocked
