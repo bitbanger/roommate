@@ -1,3 +1,6 @@
+// Required to use inet_aton():
+#define _BSD_SOURCE
+
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
@@ -7,6 +10,8 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 #include <wiringPi.h>
 #include "daemon.h"
 #include "roommate.h"
@@ -18,7 +23,7 @@ int main() {
 	struct sockaddr_in addr;
 	addr.sin_family = AF_INET;
 	addr.sin_port = htons(PORT);
-	inet_aton("127.0.0.1", &addr.sin_addr);
+	inet_aton("127.0.0.1", &addr.sin_addr); // TODO: use a more modern approach
 	if(bind(sock, (struct sockaddr *)&addr, sizeof addr) < 0)
 		bail("bind()");
 

@@ -1,4 +1,5 @@
 BINARIES := daemon lock unlock light
+CFLAGS += -std=c99
 
 all: ${BINARIES}
 roommate.o: roommate.h

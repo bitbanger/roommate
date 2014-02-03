@@ -10,16 +10,14 @@ int main(int argc, char **argv) {
 	msg[0] = MODE_LIGHT;
 
 	if(argc == 4) {
-		int ch;
-		for(ch = 1; ch < 4; ++ch) {
+		for(int ch = 1; ch < 4; ++ch) {
 			msg[ch] = atoi(argv[ch]); // TODO: validate
 		}
 	} else if(argc == 2) {
 		// parse the hex string in groups of two bytes into values
-		int i;
 		char clr[3];
 		memset(clr, 0, 3);
-		for(i = 0; i < 3; ++i) {
+		for(int i = 0; i < 3; ++i) {
 			clr[0] = argv[1][i * 2];
 			clr[1] = argv[1][i * 2 + 1];
 			msg[i + 1] = (uint8_t)strtol(clr, NULL, 16);

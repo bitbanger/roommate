@@ -1,3 +1,6 @@
+// TODO: get rid of this when we axe cuserid()
+#define _XOPEN_SOURCE
+
 #include <sys/socket.h>
 #include <libgen.h>
 #include <stdio.h>
@@ -5,7 +8,6 @@
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
-
 #include "roommate.h"
 
 int main(int argc, char **argv) {
@@ -33,7 +35,7 @@ int main(int argc, char **argv) {
 
 	char timestamp[100]; // probably big enough...
 	strftime(timestamp, sizeof timestamp, "%a %F %T", stamp);
-	logline("%s := Door %s by %s\n", timestamp, msg[1] == LOCK_LOCKED ? "locked" : "unlocked", cuserid(NULL));
+	logline("%s := Door %s by %s\n", timestamp, msg[1] == LOCK_LOCKED ? "locked" : "unlocked", cuserid(NULL)); // TODO: fix this shit because cuserid() sucks
 	
 	return 0;
 }

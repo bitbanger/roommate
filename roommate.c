@@ -1,3 +1,7 @@
+// Required to use inet_aton():
+#define _BSD_SOURCE
+
+#include <arpa/inet.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <errno.h>
@@ -7,7 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <unistd.h>
 #include "roommate.h"
 
 const int PORT = 1030;
@@ -30,7 +34,7 @@ void sendpkt(const uint8_t *pkt) {
 	
 	addr.sin_family = AF_INET;
 	addr.sin_port = htons(PORT);
-	inet_aton("127.0.0.1", &addr.sin_addr);
+	inet_aton("127.0.0.1", &addr.sin_addr); // TODO: use a more modern approach
 
 	if(sendto(sfd, pkt, PCKT_LEN, 0, (struct sockaddr *)&addr, sizeof addr) < 0)
 		bail("sendto()");
@@ -45,7 +49,7 @@ void logline(const char *msg, ...) {
 	va_start(args, msg);
 	vfprintf(file, msg, args);
 	va_end(args);
-	close(file);
+	fclose(file);
 }
 
 void bail(const char *problem) {
