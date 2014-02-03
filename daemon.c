@@ -1,9 +1,4 @@
-// Required to use inet_aton():
-#define _BSD_SOURCE
-
 #include <arpa/inet.h>
-#include <netinet/in.h>
-#include <sys/socket.h>
 #include <errno.h>
 #include <softPwm.h>
 #include <stdbool.h>
@@ -23,7 +18,7 @@ int main() {
 	struct sockaddr_in addr;
 	addr.sin_family = AF_INET;
 	addr.sin_port = htons(PORT);
-	inet_aton("127.0.0.1", &addr.sin_addr); // TODO: use a more modern approach
+	inet_pton(AF_INET, "127.0.0.1", &addr.sin_addr);
 	if(bind(sock, (struct sockaddr *)&addr, sizeof addr) < 0)
 		bail("bind()");
 
