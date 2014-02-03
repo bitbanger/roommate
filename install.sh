@@ -1,5 +1,12 @@
 #!/bin/sh
 
+userbin() {
+	[ -e /usr/local/bin/$1 ] && rm -f /usr/local/bin/$1
+	cp $1 /usr/local/bin/
+	chgrp staff /usr/local/bin/$1
+	chmod g+x,o= /usr/local/bin/$1
+}
+
 if ! ( groups | grep -q staff )
 	then
 		echo Please add yourself to the staff group, log out, and log back in.
@@ -20,10 +27,10 @@ if [ ! -e /etc/init.d/roommate ]
 		sudo ln -s /etc/init.d/roommate /etc/rc2.d/S05roommate
 	fi
 
-[ -e /usr/local/bin/lock -o -e /usr/local/bin/unlock -o -e /usr/local/bin/doorlog ] && rm -f /usr/local/bin/lock /usr/local/bin/unlock /usr/local/bin/doorlog
-cp lock unlock doorlog /usr/local/bin/
-chgrp staff /usr/local/bin/lock /usr/local/bin/unlock /usr/local/bin/doorlog
-chmod g+x,o= /usr/local/bin/lock /usr/local/bin/unlock /usr/local/bin/doorlog
+userbin lock
+userbin unlock
+userbin doorlog
+userbin light
 
 if [ ! -e /var/log/roommate ]
 	then
