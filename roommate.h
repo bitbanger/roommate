@@ -10,6 +10,8 @@ extern const char MODE_LOCK;
 extern const char LOCK_LOCKED;
 extern const char LOCK_UNLOCKED;
 
+extern const char MODE_LIGHT;
+
 extern const char *LOGFILE_PATH;
 
 void sendpkt(const uint8_t *);

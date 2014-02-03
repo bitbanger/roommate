@@ -17,6 +17,8 @@ const char MODE_LOCK = 'l';
 const char LOCK_LOCKED = 0;
 const char LOCK_UNLOCKED = 1;
 
+const char MODE_LIGHT = 'L';
+
 const char *LOGFILE_PATH = "/var/log/roommate";
 
 void sendpkt(const uint8_t *pkt) {
