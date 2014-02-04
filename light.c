@@ -33,12 +33,10 @@ int main(int argc, char **argv) {
 		} else {
 			// First, check our defined aliases
 			if(strcasecmp(argv[1], "on") == 0) {
-				printf("turning lights on\n");
 				col[0] = 255;
 				col[1] = 255;
 				col[2] = 255;
 			} else if(strcasecmp(argv[1], "off") == 0) {
-				printf("turning lights off\n");
 				col[0] = 0;
 				col[1] = 0;
 				col[2] = 0;
