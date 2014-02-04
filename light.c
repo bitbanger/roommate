@@ -72,6 +72,7 @@ int main(int argc, char **argv) {
 				}
 				
 				if(feof(fd)) {
+					printf("Color '%s' not found. Please consult /etc/X11/rgb.txt for a list of color names.\n", argv[1]);
 					fclose(fd);
 					exit(1);
 				}
@@ -81,7 +82,7 @@ int main(int argc, char **argv) {
 		}
 	} else {
 		printf("USAGE: %s <red> <green> <blue> OR %s #<hexrgb> OR %s <colorname>\n", argv[0], argv[0], argv[0]);
-		printf("\tEach color is a decimal integer between 0 and 256, or pass one six-digit hex string preceded by a #, or give a color name from the X11 color list.\n");
+		printf("\tEach color is a decimal integer between 0 and 256, or pass one six-digit hex string preceded by a #, or give a color name from the X11 color list found at /etc/X11/rgb.txt.\n");
 		exit(1);
 	}
 	
