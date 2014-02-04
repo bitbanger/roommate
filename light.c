@@ -31,42 +31,55 @@ int main(int argc, char **argv) {
 				col[i] = (uint8_t)strtol(clr, NULL, 16);
 			}
 		} else {
-			// Load up the RGB text file and search for the color
-			FILE *fd = fopen("/etc/X11/rgb.txt", "r");
-			
-			char linebuf[256];
-			
-			while(fgets(linebuf, 256, fd)) {
-				linebuf[3] = '\0';
-				col[0] = atoi(linebuf);
-				linebuf[7] = '\0';
-				col[1] = atoi(linebuf + 4);
-				linebuf[11] = '\0';
-				col[2] = atoi(linebuf + 8);
+			// First, check our defined aliases
+			if(strcasecmp(argv[1], "on") == 0) {
+				printf("turning lights on\n");
+				col[0] = 255;
+				col[1] = 255;
+				col[2] = 255;
+			} else if(strcasecmp(argv[1], "off") == 0) {
+				printf("turning lights off\n");
+				col[0] = 0;
+				col[1] = 0;
+				col[2] = 0;
+			} else {
+				// Load up the RGB text file and search for the color
+				FILE *fd = fopen("/etc/X11/rgb.txt", "r");
 				
-				// fuck the X11 people
-				char *colname = (linebuf + 12);
-				while(*colname == '\t' || *colname == ' ') ++colname;
+				char linebuf[256];
 				
-				int nlpos = strlen(colname) - 1;
-				if(colname[nlpos] == '\n') {
-					colname[nlpos] = '\0';
-				}
-				
-				if(strcasecmp(argv[1], colname) == 0) {
-					if(strcasecmp(argv[1], "PeachPuff") == 0) {
-						fprintf(stderr, "Are you fucking serious?\n");
+				while(fgets(linebuf, 256, fd)) {
+					linebuf[3] = '\0';
+					col[0] = atoi(linebuf);
+					linebuf[7] = '\0';
+					col[1] = atoi(linebuf + 4);
+					linebuf[11] = '\0';
+					col[2] = atoi(linebuf + 8);
+					
+					// fuck the X11 people
+					char *colname = (linebuf + 12);
+					while(*colname == '\t' || *colname == ' ') ++colname;
+					
+					int nlpos = strlen(colname) - 1;
+					if(colname[nlpos] == '\n') {
+						colname[nlpos] = '\0';
 					}
-					break;
+					
+					if(strcasecmp(argv[1], colname) == 0) {
+						if(strcasecmp(argv[1], "PeachPuff") == 0) {
+							fprintf(stderr, "Are you fucking serious?\n");
+						}
+						break;
+					}
 				}
-			}
-			
-			if(feof(fd)) {
+				
+				if(feof(fd)) {
+					fclose(fd);
+					exit(1);
+				}
+				
 				fclose(fd);
-				exit(1);
 			}
-			
-			fclose(fd);
 		}
 	} else {
 		printf("USAGE: %s <red> <green> <blue> OR %s #<hexrgb> OR %s <colorname>\n", argv[0], argv[0], argv[0]);
