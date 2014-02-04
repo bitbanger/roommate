@@ -31,7 +31,6 @@ userbin lock
 userbin unlock
 userbin doorlog
 userbin light
-userbin lightc
 
 if [ ! -e /var/log/roommate ]
 	then
