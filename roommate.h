@@ -1,7 +1,7 @@
-#include <stdint.h>
-
 #ifndef ROOMMATE_H
 #define ROOMMATE_H
+
+#include <stdint.h>
 
 extern const int PORT;
 extern const int PCKT_LEN;
