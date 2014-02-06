@@ -13,8 +13,8 @@ const int PORT = 1030;
 const int PCKT_LEN = 4; // B
 
 const char MODE_LOCK = 'l';
-const char LOCK_LOCKED = 0;
-const char LOCK_UNLOCKED = 1;
+const uint8_t LOCK_LOCKED = 0;
+const uint8_t LOCK_UNLOCKED = 1;
 
 const char MODE_LIGHT = 'L';
 
@@ -51,4 +51,3 @@ void bail(const char *problem) {
         fprintf(stderr, "%s: %s\n", problem, strerror(errno));
         exit(1);
 }
-

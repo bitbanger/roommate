@@ -7,8 +7,8 @@ extern const int PORT;
 extern const int PCKT_LEN;
 
 extern const char MODE_LOCK;
-extern const char LOCK_LOCKED;
-extern const char LOCK_UNLOCKED;
+extern const uint8_t LOCK_LOCKED;
+extern const uint8_t LOCK_UNLOCKED;
 
 extern const char MODE_LIGHT;
 
