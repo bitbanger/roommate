@@ -11,8 +11,7 @@ int main(int argc, char **argv) {
 	int col[3] = {0, 0, 0}; // RGB
 	
 	if(argc == 4) {
-		int ch;
-		for(ch = 0; ch < 3; ++ch) {
+		for(int ch = 0; ch < 3; ++ch) {
 			col[ch] = atoi(argv[ch + 1]); // TODO: validate
 		}
 	} else if(argc == 2) {
@@ -67,9 +66,9 @@ int main(int argc, char **argv) {
 				}
 				
 				if(feof(fd)) {
-					printf("Color '%s' not found. Please consult /etc/X11/rgb.txt for a list of color names.\n", argv[1]);
+					fprintf(stderr, "Color '%s' not found. Please consult /etc/X11/rgb.txt for a list of color names.\n", argv[1]);
 					fclose(fd);
-					exit(1);
+					return 1;
 				}
 				
 				fclose(fd);
@@ -78,13 +77,11 @@ int main(int argc, char **argv) {
 	} else {
 		printf("USAGE: %s <red> <green> <blue> OR %s 0x<hexrgb> OR %s <colorname>\n", argv[0], argv[0], argv[0]);
 		printf("\tEach color is a decimal integer between 0 and 256, or pass one six-digit hex string, or give a color name from the X11 color list found at /etc/X11/rgb.txt .\n");
-		exit(1);
+		return 1;
 	}
 	
-	int i;
-	for(i = 0; i < 3; ++i) msg[i + 1] = col[i];
+	for(int i = 0; i < 3; ++i) msg[i + 1] = col[i];
 
 	sendpkt(msg);
-
 	return 0;
 }
