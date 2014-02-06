@@ -22,7 +22,7 @@ int main() {
 
 	const int LED_RANGE = 256 >> LED_DOWNSHIFT;
 	wiringPiSetup();
-	softPwmCreate(GPIO_SERVO, SERVO_LOCKED, SERVO_RANGE);
+	softPwmCreate(GPIO_DOOR_SERVO, DOOR_SERVO_LOCKED, DOOR_SERVO_RANGE);
 	softPwmCreate(GPIO_RED, LED_RANGE, LED_RANGE);
 	softPwmCreate(GPIO_GREEN, LED_RANGE, LED_RANGE);
 	softPwmCreate(GPIO_BLUE, LED_RANGE, LED_RANGE);
@@ -30,7 +30,7 @@ int main() {
 
 	uint8_t buf[PCKT_LEN];
 	while(true) {
-		pinMode(GPIO_SERVO, INPUT);
+		pinMode(GPIO_DOOR_SERVO, INPUT);
 
 		if(recv(sock, &buf, sizeof buf, 0) != PCKT_LEN) {
 			fprintf(stderr, "recv(): %s\n", strerror(errno));
@@ -39,12 +39,12 @@ int main() {
 
 		if(buf[0] == MODE_LOCK) {
 			if(buf[1] == LOCK_LOCKED) {
-				softPwmWrite(GPIO_SERVO, SERVO_LOCKED);
+				softPwmWrite(GPIO_DOOR_SERVO, DOOR_SERVO_LOCKED);
 			}
 			else { // buf[1] == LOCK_UNLOCKED
-				softPwmWrite(GPIO_SERVO, SERVO_UNLOCKED);
+				softPwmWrite(GPIO_DOOR_SERVO, DOOR_SERVO_UNLOCKED);
 			}
-			pinMode(GPIO_SERVO, OUTPUT);
+			pinMode(GPIO_DOOR_SERVO, OUTPUT);
 			sleep(1); // TODO: don't block here
 		}
 		else if(buf[0] == MODE_LIGHT) {

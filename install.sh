@@ -30,6 +30,7 @@ if [ ! -e /etc/init.d/roommate ]
 userbin lock
 userbin unlock
 userbin doorlog
+userbin bulb
 userbin light
 
 if [ ! -e /var/log/roommate ]

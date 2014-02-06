@@ -14,6 +14,10 @@ const char MODE_LOCK = 'l';
 const uint8_t LOCK_LOCKED = 0;
 const uint8_t LOCK_UNLOCKED = 1;
 
+const char MODE_LIGHTSWITCH = 's';
+const uint8_t LIGHTSWITCH_OFF = 0;
+const uint8_t LIGHTSWITCH_ON = 1;
+
 const char MODE_LIGHT = 'L';
 
 const char *LOGFILE_PATH = "/var/log/roommate";

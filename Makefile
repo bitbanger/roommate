@@ -1,4 +1,4 @@
-BINARIES := daemon lock unlock light
+BINARIES := daemon lock unlock bulb light
 CFLAGS += -std=c99 -Wall
 
 all: ${BINARIES}
@@ -10,6 +10,8 @@ daemon: CFLAGS += -lwiringPi
 lock: roommate.o
 unlock: lock
 	cp lock unlock
+
+bulb: roommate.o
 
 light: roommate.o
 
